@@ -39,15 +39,15 @@
 <script>
 
 // Define a new Vue instance
-Vue.createApp({
+const app =Vue.createApp({
 
-  // Set the element to mount the instance to as the div with id "app"
-  el: '#app',
 
   // Define a data object that includes an empty todos array and a newTodoText property
-  data: {
+  data() {
+    return{
     todos: [],
     newTodoText: ''
+    } 
   },
 
   // Define two methods: addTodo and removeTodo
@@ -57,10 +57,10 @@ Vue.createApp({
     addTodo: function() {
 
       // Get the text of the new to-do item from the newTodoText property
-      var newTodoText = this.newTodoText;
+      const newTodoText = this.newTodoText;
 
       // Create a new to-do object with a unique id and the newTodoText as its text
-      var newTodo = {
+      const newTodo = {
         id: Date.now(), // Use the current timestamp as a unique id
         text: newTodoText
       };
@@ -87,6 +87,8 @@ Vue.createApp({
     }
   }
 });
+
+app.mount('#app');
 
 </script>
 
