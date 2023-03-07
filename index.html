@@ -4,9 +4,91 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://unpkg.com/vue@3"></script>
+
     <title>Document</title>
 </head>
 <body>
-    
+    <!-- Import Vue from a CDN -->
+
+
+<!-- Define a new Vue instance with the id "app" -->
+<div id="app">
+
+  <!-- Add a heading -->
+  <h2>My To-Do List</h2>
+
+  <!-- Add a text input field for new to-do items -->
+  <input type="text" v-model="newTodoText">
+
+  <!-- Add a button to add new to-do items -->
+  <button v-on:click="addTodo">Add Todo</button>
+
+  <!-- Use v-for to loop through the todos array and display each item -->
+  <ul>
+    <li v-for="todo in todos" v-bind:key="todo.id">
+      {{ todo.text }}
+      <button v-on:click="removeTodo(todo.id)">Remove</button>
+    </li>
+  </ul>
+
+</div>
+
+<!-- Define a script section for the Vue code -->
+<script>
+
+// Define a new Vue instance
+Vue.createApp({
+
+  // Set the element to mount the instance to as the div with id "app"
+  el: '#app',
+
+  // Define a data object that includes an empty todos array and a newTodoText property
+  data: {
+    todos: [],
+    newTodoText: ''
+  },
+
+  // Define two methods: addTodo and removeTodo
+  methods: {
+
+    // The addTodo method adds a new to-do item to the todos array
+    addTodo: function() {
+
+      // Get the text of the new to-do item from the newTodoText property
+      var newTodoText = this.newTodoText;
+
+      // Create a new to-do object with a unique id and the newTodoText as its text
+      var newTodo = {
+        id: Date.now(), // Use the current timestamp as a unique id
+        text: newTodoText
+      };
+
+      // Add the new to-do object to the todos array
+      this.todos.push(newTodo);
+
+      // Clear the newTodoText property so the input field is empty
+      this.newTodoText = '';
+    },
+
+    // The removeTodo method removes a to-do item from the todos array
+    removeTodo: function(todoId) {
+
+      // Loop through the todos array and find the to-do item with the matching id
+      for (var i = 0; i < this.todos.length; i++) {
+        if (this.todos[i].id === todoId) {
+
+          // Use the splice method to remove the to-do item from the todos array
+          this.todos.splice(i, 1);
+          break;
+        }
+      }
+    }
+  }
+});
+
+</script>
+
 </body>
 </html>
