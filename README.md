@@ -1,3 +1,3 @@
 # WEB3-VUE
 
-link:
+link: https://xynthiawan.github.io/WEB3-VUE/
